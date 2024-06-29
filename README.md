@@ -12,3 +12,15 @@
    VISION_PREDICTION_RESOURCE_ID="<your-prediction-resources-id>"
    ```
 4. Done
+
+
+## Azure Document Intelligence
+1. Go to your Azure Document intelligence Resources.
+2. Choose `Resource Management` and then click on `Keys and Endpoint`
+3. Copy `Key 1` and `Endpoint`.
+4. Paste in `.env` file like before.
+   ```env
+   DOCUMENT_INTELLIGENCE_KEY=<your-docs-intelligence-key>
+   DOCUMENT_INTELLIGENCE_ENDPOINT="<endpoint>"
+   ```
+5. Done
