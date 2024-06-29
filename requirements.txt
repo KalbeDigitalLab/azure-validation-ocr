@@ -1,2 +1,3 @@
 azure-cognitiveservices-vision-customvision
-python-detenv
+python-dotenv
+ipykernel
