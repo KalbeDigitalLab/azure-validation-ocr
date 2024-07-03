@@ -43,4 +43,4 @@ class CustomVisionService:
 # Usage
 if __name__ == "__main__":
     cv_service = CustomVisionService()
-    cv_service.classify_image("receipt-data/aeon.jpg")
+    cv_service.classify_image("sample_test_data/aeon.jpg")
