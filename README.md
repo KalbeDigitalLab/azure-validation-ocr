@@ -1,5 +1,21 @@
 # Azure Image Validation and OCR
 
+"Azure Image Validation and OCR" is a project designed to automate the process of validating and extracting information from document receipts. The project utilizes Azure AI services to classify and perform Optical Character Recognition (OCR) on uploaded images.
+
+### Key Features
+
+1. **Image Validation**:
+   - When a user uploads a document, the system first checks if the uploaded file is an image.
+   - The image is then classified to determine whether it is a receipt or a non-receipt using Azure AI Custom Vision.
+
+2. **Optical Character Recognition (OCR)**:
+   - If the image is classified as a receipt, the process continues with OCR.
+   - Azure Document Intelligence is used to extract text and relevant information from the receipt.
+
+### Tools and Technologies
+
+- **Azure AI Custom Vision**: Used for image validation and classification to distinguish between receipt and non-receipt images.
+- **Azure Document Intelligence**: Used for OCR to extract text from receipt images.
 
 ## Dataset
 
