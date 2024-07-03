@@ -80,7 +80,7 @@ class ReceiptOCR:
 
 # Example usage
 if __name__ == "__main__":
-    image_path = "receipt-data/aeon.jpg"
+    image_path = "sample_test_data/aeon.jpg"
     ocr = ReceiptOCR(image_path)
     result = ocr.process_receipt()
     ocr.display_receipt_with_bounding_boxes(result)
