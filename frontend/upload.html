@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fluent File Upload Form</title>
+    <link rel="stylesheet" href="styles-upload.css">
+    <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1>File Upload</h1>
+        <form action="#" method="post" enctype="multipart/form-data">
+            <div class="file-upload">
+                <input type="file" id="file-input" name="file" accept=".pdf,.docx,.jpg,.jpeg,.png,.gif" required>
+                <label for="file-input">
+                    <svg class="file-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+                    </svg>
+                    <span class="file-text">Choose a file</span>
+                </label>
+            </div>
+            <button type="submit" class="submit-btn">Upload</button>
+        </form>
+    </div>
+    <script>
+        const fileInput = document.getElementById('file-input');
+        const fileText = document.querySelector('.file-text');
+
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files.length > 0) {
+                fileText.textContent = e.target.files[0].name;
+            } else {
+                fileText.textContent = 'Choose a file';
+            }
+        });
+    </script>
+</body>
+</html>
