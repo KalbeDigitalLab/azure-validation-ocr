@@ -52,20 +52,20 @@ Both datasets are stored in the `dataset` directory of the project, with subdire
 ## Installation and Setup
 
 1. Clone the repository:
-   ```
+   ```bash
    git clone https://github.com/adhiiisetiawan/azure-validation-ocr.git
    ```
 2. Navigate to the project directory:
-   ```
+   ```bash
    cd azure-image-validation-ocr
    ```
 3. Create a virtual environment and activate it:
-   ```
+   ```bash
    python -m venv .venv
    source .venv/bin/activate  # On Windows use `.venv\Scripts\activate`
    ```
 4. Install the required packages:
-   ```
+   ```bash
    pip install -r requirements.txt
    ```
 
