@@ -1,5 +1,19 @@
 # Azure Image Validation and OCR
 
+
+## Dataset
+
+### Hemlock and Cherry Dataset
+The Hemlock and Cherry dataset is used for image classification tasks and consists of images of Hemlock and Cherry trees. This dataset is sourced from Azure Cognitive Search sample images, which can be found [here](https://github.com/Azure-Samples/cognitive-services-sample-data-files/tree/master/CustomVision/ImageClassification/Images).
+
+### Receipt and Non-Receipt Dataset
+The Receipt and Non-Receipt dataset is used for OCR (Optical Character Recognition) and classification tasks. It contains:
+
+- **Receipt Dataset**: Images of receipts, downloaded from [Kaggle OCR Receipts Text Detection Dataset](https://www.kaggle.com/datasets/trainingdatapro/ocr-receipts-text-detection).
+- **Non-Receipt Dataset**: Images of non-receipt items, collected manually from various local sources with random non-receipt images.
+
+Both datasets are stored in the `dataset` directory of the project, with subdirectories for each specific dataset.
+
 ## Project Structure
 ```
 ├── dataset                   <- Project datasets
@@ -36,7 +50,8 @@ The Custom Vision service uses a machine learning algorithm to analyze images fo
    VISION_PREDICTION_KEY=<your-prediction-key>
    VISION_PREDICTION_RESOURCE_ID="<your-prediction-resources-id>"
    ```
-4. Run each cell on jupyter notebook
+4. Run each cell on jupyter notebook if you want to know flow of training process
+5. Run `receipt_validation.py` if you want to do inference trained model.
 
 
 ## Azure Document Intelligence
@@ -52,3 +67,4 @@ Azure AI Document Intelligence is a cloud-based Azure AI service that enables yo
    DOCUMENT_INTELLIGENCE_ENDPOINT="<endpoint>"
    ```
 5. Run each cell in notebook Azure Document intelligence
+6. Run `receipt_ocr.py` if you want to do inference trained model.
