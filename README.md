@@ -57,7 +57,7 @@ Both datasets are stored in the `dataset` directory of the project, with subdire
    ```
 2. Navigate to the project directory:
    ```bash
-   cd azure-image-validation-ocr
+   cd azure-validation-ocr
    ```
 3. Create a virtual environment and activate it:
    ```bash
