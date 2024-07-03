@@ -1,5 +1,24 @@
 # Azure Image Validation and OCR
 
+## Project Structure
+```
+├── dataset                   <- Project datasets
+│   ├── hemlock_cheery_dataset      <- Hemlock and cherry dataset
+│   └── receipt_dataset             <- Receipt dataset
+│
+├── notebook                 <- Jupyter notebooks for training and inference
+│
+├── output                   <- OCR output images
+│
+├── sample_test_data         <- Sample images for testing ML models (classification and OCR)
+│
+├── .gitignore               <- List of files ignored by git
+├── README.md                <- Project documentation
+├── receipt_ocr.py           <- Implementation of OCR inference
+├── receipt_validation.py    <- Implementation of receipt classification inference
+|__ requirements.txt         <- List of packages and dependencies
+```
+
 ## Azure AI Custom Vision
 Azure AI Custom Vision is an image recognition service that lets you build, deploy, and improve your own image identifier models. An image identifier applies labels to images, according to their visual characteristics. Each label represents a classification or object. Custom Vision allows you to specify your own labels and train custom models to detect them. You can use Custom Vision through a client library SDK, REST API, or through the Custom Vision web portal (https://customvision.ai/).
 
