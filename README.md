@@ -35,18 +35,20 @@ Both datasets are stored in the `dataset` directory of the project, with subdire
 ├── dataset                   <- Project datasets
 │   ├── hemlock_cheery_dataset      <- Hemlock and cherry dataset
 │   └── receipt_dataset             <- Receipt dataset
+|
+├── frontend                  <- Simple frontend implementation
+|
+├── notebook                  <- Jupyter notebooks for training and inference
 │
-├── notebook                 <- Jupyter notebooks for training and inference
+├── output                    <- OCR output images
 │
-├── output                   <- OCR output images
+├── sample_test_data          <- Sample images for testing ML models (classification and OCR)
 │
-├── sample_test_data         <- Sample images for testing ML models (classification and OCR)
-│
-├── .gitignore               <- List of files ignored by git
-├── README.md                <- Project documentation
-├── receipt_ocr.py           <- Implementation of OCR inference
-├── receipt_validation.py    <- Implementation of receipt classification inference
-|__ requirements.txt         <- List of packages and dependencies
+├── .gitignore                <- List of files ignored by git
+├── README.md                 <- Project documentation
+├── receipt_ocr.py            <- Implementation of OCR inference
+├── receipt_validation.py     <- Implementation of receipt classification inference
+|__ requirements.txt          <- List of packages and dependencies
 ```
 
 ## Installation and Setup
