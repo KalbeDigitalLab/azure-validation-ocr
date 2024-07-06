@@ -39,8 +39,10 @@ class CustomVisionService:
             # Display the results
             for prediction in results.predictions:
                 print(f"\t{prediction.tag_name}: {prediction.probability * 100:.2f}%")
+                return prediction.tag_name, prediction.probability * 100
 
 # Usage
 if __name__ == "__main__":
     cv_service = CustomVisionService()
-    cv_service.classify_image("sample_test_data/aeon.jpg")
+    label, confidence = cv_service.classify_image("sample_test_data/aeon.jpg")
+    print(f"Label: {label}, Confidence: {confidence:.2f}%")

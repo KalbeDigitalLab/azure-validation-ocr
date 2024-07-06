@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>File Upload</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('form').submit(function(event) {
+                event.preventDefault(); // Prevent the default form submission
+                var formData = new FormData($(this)[0]);
+                $.ajax({
+                    url: 'http://127.0.0.1:5000/upload',
+                    type: 'POST',
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function(response) {
+                        alert('File uploaded successfully');
+                    },
+                    error: function(response) {
+                        var resJson = JSON.parse(response.responseText);
+                        console.log(resJson);
+                        alert(resJson.message); // Show the alert with the message from the backend
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <h2>Upload File</h2>
+    <form action="http://127.0.0.1:5000/upload" method="post" enctype="multipart/form-data">
+        <input type="file" name="file">
+        <input type="submit" value="Upload">
+    </form>
+</body>
+</html>
