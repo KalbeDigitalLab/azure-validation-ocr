@@ -3,7 +3,7 @@ azure-ai-formrecognizer==3.3.3
 azure-cognitiveservices-vision-customvision==3.1.0
 azure-common==1.1.28
 azure-core==1.30.2
-certifi==2024.6.2
+certifi==2024.7.4
 charset-normalizer==3.3.2
 comm==0.2.2
 debugpy==1.8.2
