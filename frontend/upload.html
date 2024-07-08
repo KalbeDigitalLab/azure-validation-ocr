@@ -10,20 +10,91 @@
 <body>
     <div class="container">
         <h1>File Upload</h1>
-        <form action="#" method="post" enctype="multipart/form-data">
-            <div class="file-upload">
-                <input type="file" id="file-input" name="file" accept=".pdf,.docx,.jpg,.jpeg,.png,.gif" required>
-                <label for="file-input">
-                    <svg class="file-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                        <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
-                    </svg>
-                    <span class="file-text">Choose a file</span>
-                </label>
-            </div>
-            <button type="submit" class="submit-btn">Upload</button>
-        </form>
+        <div class="file-upload">
+            <input type="file" id="file-input" name="file" accept=".pdf,.docx,.jpg,.jpeg,.png,.gif" required>
+            <label for="file-input">
+                <svg class="file-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+                </svg>
+                <span class="file-text">Choose a file</span>
+            </label>
+        </div>
+        <button type="button" id="upload-btn" class="submit-btn">Upload</button>
+        
+        <div id="result-container" style="display: none;">
+            <h2 id="merchant-name"></h2>
+            <p id="transaction-date"></p>
+            <table id="items-table">
+                <thead>
+                    <tr>
+                        <th>Description</th>
+                        <th>Total Price</th>
+                    </tr>
+                </thead>
+                <tbody id="items-body">
+                </tbody>
+            </table>
+            <p id="total"></p>
+        </div>
     </div>
     <script>
+        document.getElementById('upload-btn').addEventListener('click', async () => {
+            const fileInput = document.getElementById('file-input');
+            const file = fileInput.files[0];
+
+            if (!file) {
+                alert('Please select a file.');
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('file', file);
+
+            try {
+                const response = await fetch('http://127.0.0.1:5000/api/validate-receipt', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (!response.ok) {
+                    if (response.status === 400) {
+                        alert('The uploaded file is not a receipt. Please try again.');
+                    } else {
+                        throw new Error(`HTTP error! Status: ${response.status} - ${response.statusText}`);
+                    }
+                    return;
+                }
+
+                const data = await response.json();
+                console.log('Response data:', data);
+
+                // Update UI with received data
+                document.getElementById('merchant-name').textContent = data.MerchantName;
+                document.getElementById('transaction-date').textContent = data.TransactionDate;
+
+                const itemsBody = document.getElementById('items-body');
+                itemsBody.innerHTML = '';
+
+                data.Items.forEach(item => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${item.Description}</td>
+                        <td>${item.TotalPrice}</td>
+                    `;
+                    itemsBody.appendChild(row);
+                });
+
+                document.getElementById('total').textContent = `Total: ${data.Total.toFixed(2)}`;
+
+                // Show result container
+                document.getElementById('result-container').style.display = 'block';
+            } catch (error) {
+                console.error('Error:', error);
+                alert('There was a problem uploading your file. Please try again.');
+            }
+        });
+
+        // Update file text label
         const fileInput = document.getElementById('file-input');
         const fileText = document.querySelector('.file-text');
 
