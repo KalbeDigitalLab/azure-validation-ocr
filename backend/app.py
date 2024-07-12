@@ -22,16 +22,18 @@ def validate_receipt_route():
     file_path = os.path.join(TEMP_DIR, file.filename)
     file.save(file_path)
 
-    # Process the receipt
-    cv_service = CustomVisionService()
-    class_result = cv_service.classify_image(file_path)
-    
-    if class_result.lower() != "receipt":
-        # Clean up the temporary file
-        os.remove(file_path)
+    # Check if the file is a PDF
+    if not file.filename.lower().endswith('.pdf'):
+        # Process the receipt image
+        cv_service = CustomVisionService()
+        class_result = cv_service.classify_image(file_path)
         
-        # Return an error response
-        return jsonify({"message": "Invalid receipt"}), status.HTTP_400_BAD_REQUEST
+        if class_result.lower() != "receipt":
+            # Clean up the temporary file
+            os.remove(file_path)
+            
+            # Return an error response
+            return jsonify({"message": "Invalid receipt"}), status.HTTP_400_BAD_REQUEST
     
     # Process the receipt
     ocr = ReceiptOCR(file_path)
@@ -41,7 +43,7 @@ def validate_receipt_route():
     os.remove(file_path)
     
     # Return the extracted fields
-    return result , status.HTTP_200_OK
+    return result, status.HTTP_200_OK
 
 if __name__ == "__main__":
     app.run(debug=True)
