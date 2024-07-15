@@ -33,8 +33,11 @@ class ReceiptOCR:
 
             print("Receipt Fields:")
             self._print_field(document, "MerchantName", "Merchant Name")
+            self._print_field(document, "MerchantPhone", "Merchant Phone")
             self._print_field(document, "TransactionDate", "Transaction Date")
+            self._print_field(document, "TotalTax", "Tax")
             self._print_field(document, "Total", "Total")
+            print("------------------------------------")
             self._print_items(document)
 
         else:
@@ -75,8 +78,13 @@ class ReceiptOCR:
                 print(f"  Item {idx + 1}:")
                 if item.value.get("Description"):
                     print(f"    Description: {item.value['Description'].value}")
+                if item.value.get("Price"):
+                    print(f"    Price : {item.value['Price'].value}")
+                if item.value.get("Quantity"):
+                    print(f"    Quantity : {item.value['Quantity'].value}")
                 if item.value.get("TotalPrice"):
                     print(f"    Total Price: {item.value['TotalPrice'].value}")
+                
 
 # Example usage
 if __name__ == "__main__":
