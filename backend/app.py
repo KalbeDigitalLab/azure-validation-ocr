@@ -2,9 +2,9 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 from flask_api import status
 from receipt_validation_api import CustomVisionService
-from receipt_ocr_api import ReceiptOCR
-
+from receipt_ocr_api import ReceiptOCR 
 import os
+import logging
 
 app = Flask(__name__)
 CORS(app)
@@ -12,6 +12,8 @@ CORS(app)
 # Ensure temporary directory exists
 TEMP_DIR = os.path.join(os.getcwd(), "temp")
 os.makedirs(TEMP_DIR, exist_ok=True)
+
+logging.basicConfig(level=logging.DEBUG)
 
 @app.route("/api/validate-receipt", methods=["POST"])
 def validate_receipt_route():
@@ -38,6 +40,7 @@ def validate_receipt_route():
     # Process the receipt
     ocr = ReceiptOCR(file_path)
     result = ocr.process_receipt_api()
+    logging.debug(f"OCR result: {result}")
 
     # Clean up the temporary file
     os.remove(file_path)

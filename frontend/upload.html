@@ -23,11 +23,14 @@
         
         <div id="result-container" style="display: none;">
             <h2 id="merchant-name"></h2>
+            <p id="merchant-phone-number"></p>
             <p id="transaction-date"></p>
             <table id="items-table">
                 <thead>
                     <tr>
                         <th>Description</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
                         <th>Total Price</th>
                     </tr>
                 </thead>
@@ -35,6 +38,7 @@
                 </tbody>
             </table>
             <p id="total"></p>
+            <p id="total-tax"></p>
         </div>
     </div>
     <script>
@@ -69,8 +73,10 @@
                 console.log('Response data:', data);
 
                 // Update UI with received data
-                document.getElementById('merchant-name').textContent = data.MerchantName;
-                document.getElementById('transaction-date').textContent = data.TransactionDate;
+                document.getElementById('merchant-name').textContent = data.MerchantName || 'N/A';
+                document.getElementById('merchant-phone-number').textContent = data.MerchantPhoneNumber || 'N/A';
+                document.getElementById('transaction-date').textContent = data.TransactionDate || 'N/A';
+                
 
                 const itemsBody = document.getElementById('items-body');
                 itemsBody.innerHTML = '';
@@ -79,12 +85,15 @@
                     const row = document.createElement('tr');
                     row.innerHTML = `
                         <td>${item.Description}</td>
-                        <td>${item.TotalPrice}</td>
+                        <td>${item.Quantity || 'N/A'}</td>
+                        <td>${item.Price || 'N/A'}</td>
+                        <td>${item.TotalPrice || 'N/A'}</td>
                     `;
                     itemsBody.appendChild(row);
                 });
 
                 document.getElementById('total').textContent = `Total: ${data.Total.toFixed(2)}`;
+                document.getElementById('total-tax').textContent = `Total Tax: ${data.TotalTax.toFixed(2)}`;
 
                 // Show result container
                 document.getElementById('result-container').style.display = 'block';
