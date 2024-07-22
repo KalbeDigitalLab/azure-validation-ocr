@@ -78,7 +78,10 @@
                     document.getElementById('merchant-phone-number').textContent = data.MerchantPhoneNumber;
                 }
 
-                document.getElementById('transaction-date').textContent = data.TransactionDate || 'N/A';
+                if (data.TransactionDate !== null && data.TransactionDate !== undefined) {
+                    document.getElementById('transaction-date').textContent = data.TransactionDate;
+                }
+
                 
 
                 const itemsBody = document.getElementById('items-body');
