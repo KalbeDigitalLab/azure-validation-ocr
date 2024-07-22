@@ -73,7 +73,7 @@
                 console.log('Response data:', data);
 
                 // Update UI with received data
-                document.getElementById('merchant-name').textContent = data.MerchantName || 'N/A';
+                document.getElementById('merchant-name').textContent = data.MerchantName || '-';
                 if (data.MerchantPhoneNumber !== null && data.MerchantPhoneNumber !== undefined) {
                     document.getElementById('merchant-phone-number').textContent = data.MerchantPhoneNumber;
                 }
@@ -91,9 +91,9 @@
                     const row = document.createElement('tr');
                     row.innerHTML = `
                         <td>${item.Description}</td>
-                        <td>${item.Quantity || 'N/A'}</td>
-                        <td>${item.Price || 'N/A'}</td>
-                        <td>${item.TotalPrice || 'N/A'}</td>
+                        <td>${item.Quantity || '-'}</td>
+                        <td>${item.Price || '-'}</td>
+                        <td>${item.TotalPrice || '-'}</td>
                     `;
                     itemsBody.appendChild(row);
                 });
