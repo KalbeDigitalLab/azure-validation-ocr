@@ -92,7 +92,10 @@
                     itemsBody.appendChild(row);
                 });
 
-                document.getElementById('total').textContent = `Total: ${data.Total.toFixed(2)}`;
+                if (data.Total !== null && data.Total !== undefined) {
+                    document.getElementById('total').textContent = `Total: ${data.Total.toFixed(2)}`;
+                }
+
                 if (data.TotalTax !== null && data.TotalTax !== undefined) {
                     document.getElementById('total-tax').textContent = `Total Tax: ${data.TotalTax.toFixed(2)}`;
                 }
