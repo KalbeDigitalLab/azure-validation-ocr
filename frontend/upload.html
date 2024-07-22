@@ -93,7 +93,10 @@
                 });
 
                 document.getElementById('total').textContent = `Total: ${data.Total.toFixed(2)}`;
-                document.getElementById('total-tax').textContent = `Total Tax: ${data.TotalTax.toFixed(2)}`;
+                if (data.TotalTax !== null && data.TotalTax !== undefined) {
+                    document.getElementById('total-tax').textContent = `Total Tax: ${data.TotalTax.toFixed(2)}`;
+                }
+
 
                 // Show result container
                 document.getElementById('result-container').style.display = 'block';
