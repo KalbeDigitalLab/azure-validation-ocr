@@ -74,7 +74,10 @@
 
                 // Update UI with received data
                 document.getElementById('merchant-name').textContent = data.MerchantName || 'N/A';
-                document.getElementById('merchant-phone-number').textContent = data.MerchantPhoneNumber || 'N/A';
+                if (data.MerchantPhoneNumber !== null && data.MerchantPhoneNumber !== undefined) {
+                    document.getElementById('merchant-phone-number').textContent = data.MerchantPhoneNumber;
+                }
+
                 document.getElementById('transaction-date').textContent = data.TransactionDate || 'N/A';
                 
 
