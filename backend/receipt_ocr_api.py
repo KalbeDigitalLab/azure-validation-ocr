@@ -34,7 +34,9 @@ class ReceiptOCR:
 
             print("Receipt Fields:")
             self._print_field(document, "MerchantName", "Merchant Name")
+            self._print_field(document, "MerchantPhoneNumber", "Merchant Phone")
             self._print_field(document, "TransactionDate", "Transaction Date")
+            self._print_field(document, "TotalTax", "Total Tax")
             self._print_field(document, "Total", "Total")
             self._print_items(document)
 
@@ -56,7 +58,9 @@ class ReceiptOCR:
             document = result.documents[0]  # Get the first document
 
             response["MerchantName"] = document.fields.get("MerchantName").value if document.fields.get("MerchantName") else None
+            response["MerchantPhoneNumber"] = document.fields.get("MerchantPhoneNumber").value if document.fields.get("MerchantPhoneNumber") else None
             response["TransactionDate"] = str(document.fields.get("TransactionDate").value if document.fields.get("TransactionDate") else None)
+            response["TotalTax"] = document.fields.get("TotalTax").value if document.fields.get("TotalTax") else None
             response["Total"] = document.fields.get("Total").value if document.fields.get("Total") else None
 
             items = []
@@ -64,6 +68,8 @@ class ReceiptOCR:
                 for idx, item in enumerate(document.fields["Items"].value):
                     item_data = {
                         "Description": item.value.get("Description").value if item.value.get("Description") else None,
+                        "Quantity": item.value.get("Quantity").value if item.value.get("Quantity") else None,
+                        "Price": item.value.get("Price").value if item.value.get("Price") else None,
                         "TotalPrice": item.value.get("TotalPrice").value if item.value.get("TotalPrice") else None
                     }
                     items.append(item_data)
@@ -106,6 +112,10 @@ class ReceiptOCR:
                 print(f"  Item {idx + 1}:")
                 if item.value.get("Description"):
                     print(f"    Description: {item.value['Description'].value}")
+                if item.value.get("Quantity"):
+                    print(f"    Quantity : {item.value['Quantity'].value}")
+                if item.value.get("Price"):
+                    print(f"    Price : {item.value['Price'].value}")
                 if item.value.get("TotalPrice"):
                     print(f"    Total Price: {item.value['TotalPrice'].value}")
 
