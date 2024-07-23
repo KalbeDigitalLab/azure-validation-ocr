@@ -143,7 +143,6 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ## Acknowledgments
 We would like to express our sincere gratitude to the following individuals and resources for their valuable contributions to this project:
 
-- The contributors of the **Hemlock and Cherry Dataset**, sourced from the [Azure Cognitive Search sample images](https://github.com/Azure-Samples/cognitive-services-sample-data-files/tree/master/CustomVision/ImageClassification/Images). This dataset, featuring images of Hemlock and Cherry trees, has been crucial for our image classification tasks.
-- The creators of the **Receipt Dataset**, available from the [Kaggle OCR Receipts Text Detection Dataset](https://www.kaggle.com/datasets/trainingdatapro/ocr-receipts-text-detection). This dataset, comprising images of receipts, has been essential for our OCR and classification processes.
-- The providers of the **Non-Receipt Dataset**, which was manually collected from various local sources. This dataset of random non-receipt images has been instrumental in differentiating between receipt and non-receipt items.
-- The contributors for this project, who provided essential code components. Their work has greatly facilitated the development and implementation image validation and OCR functionalities.
+- The contributors of the **Hemlock and Cherry Dataset**, sourced from the Azure Cognitive Search sample images.
+- The creators of the **Receipt Dataset**, available from the Kaggle OCR Receipts Text Detection Dataset.
+- The contributors for this project, who provided essential code components.
