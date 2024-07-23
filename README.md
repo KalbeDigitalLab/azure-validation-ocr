@@ -14,8 +14,9 @@
 
 ### Tools and Technologies
 
-- **Azure AI Custom Vision**: Used for image validation and classification to distinguish between receipt and non-receipt images.
-- **Azure Document Intelligence**: Used for OCR to extract text from receipt images.
+- **Azure AI Custom Vision**: Used for image validation and classification to distinguish between receipt and non-receipt images. [Learn more](https://learn.microsoft.com/en-us/azure/ai-services/custom-vision-service/)
+- **Azure Document Intelligence**: Used for OCR to extract text from receipt images. [Learn more](https://learn.microsoft.com/en-us/azure/ai-services/document-intelligence/)
+- **Flask**: A lightweight WSGI web application framework for Python. Flask is used for the backend implementation, handling API requests, processing images, and interacting with Azure AI services. Key features of Flask include its simplicity, flexibility, and ease of use for developing web applications. [Learn more](https://flask.palletsprojects.com/en/3.0.x/)
 
 ## Dataset
 
@@ -123,34 +124,6 @@ The web application consists of a simple yet effective integration of Azure AI s
    - The frontend is designed for simplicity and ease of use, providing a clean and intuitive interface for users to interact with the application.
 
 The integration of these services ensures that the application can accurately validate and extract information from receipt images, making it a valuable tool for automating document processing tasks.
-
-### Key Features
-
-1. **Image Validation**:
-   - When a user uploads a document, the system first checks if the uploaded file is an image.
-   - The image is then classified to determine whether it is a receipt or a non-receipt using Azure AI Custom Vision.
-
-2. **Optical Character Recognition (OCR)**:
-   - If the image is classified as a receipt, the process continues with OCR.
-   - Azure Document Intelligence is used to extract text and relevant information from the receipt.
-
-### Tools and Technologies
-
-- **Azure AI Custom Vision**: 
-  - Used for image validation and classification to distinguish between receipt and non-receipt images. It allows you to build and train custom image classifiers. [Learn more](https://learn.microsoft.com/en-us/azure/ai-services/custom-vision-service/)
-
-- **Azure Document Intelligence**: 
-  - Provides OCR capabilities to extract text from receipt images and other structured documents. It enables intelligent document processing and data extraction. [Learn more](https://learn.microsoft.com/en-us/azure/ai-services/document-intelligence/)
-
-- **Flask**: 
-  - A lightweight WSGI web application framework for Python. Flask is used for the backend implementation, handling API requests, processing images, and interacting with Azure AI services.
-  - Key features of Flask include its simplicity, flexibility, and ease of use for developing web applications. [Learn more](https://flask.palletsprojects.com/en/3.0.x/)
-
-- **HTML/CSS/JavaScript**:
-  - The frontend is built using standard web technologies to create a simple and user-friendly interface. HTML structures the web pages, CSS styles them, and JavaScript adds interactivity.
-
-- **Python**: 
-  - The programming language used for backend development, including interacting with Azure services and implementing the application's logic.
  
 ### Run Web Apps
 1. Backend Setup
