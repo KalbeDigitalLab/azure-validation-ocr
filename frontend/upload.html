@@ -20,7 +20,9 @@
             </label>
         </div>
         <button type="button" id="upload-btn" class="submit-btn">Upload</button>
-        
+        <div class="progress-bar-container" style="display: none;">
+            <div class="progress-bar" id="progress-bar"></div>
+        </div>
         <div id="result-container" style="display: none;">
             <h2 id="merchant-name"></h2>
             <p id="merchant-phone-number"></p>
@@ -42,83 +44,90 @@
         </div>
     </div>
     <script>
-        document.getElementById('upload-btn').addEventListener('click', async () => {
+        document.getElementById('upload-btn').addEventListener('click', () => {
             const fileInput = document.getElementById('file-input');
             const file = fileInput.files[0];
-
             if (!file) {
                 alert('Please select a file.');
                 return;
             }
-
+        
             const formData = new FormData();
             formData.append('file', file);
-
-            try {
-                const response = await fetch('http://127.0.0.1:5000/api/validate-receipt', {
-                    method: 'POST',
-                    body: formData
-                });
-
-                if (!response.ok) {
-                    if (response.status === 400) {
-                        alert('The uploaded file is not a receipt. Please try again.');
-                    } else {
-                        throw new Error(`HTTP error! Status: ${response.status} - ${response.statusText}`);
+        
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', 'http://127.0.0.1:5000/api/validate-receipt', true);
+        
+            // Show progress bar
+            const progressBarContainer = document.querySelector('.progress-bar-container');
+            const progressBar = document.getElementById('progress-bar');
+            progressBarContainer.style.display = 'block';
+        
+            xhr.upload.onprogress = (event) => {
+                if (event.lengthComputable) {
+                    const percentComplete = (event.loaded / event.total) * 100;
+                    progressBar.style.width = percentComplete + '%';
+                }
+            };
+        
+            xhr.onload = () => {
+                if (xhr.status === 200) {
+                    const data = JSON.parse(xhr.responseText);
+                    console.log('Response data:', data);
+        
+                    // Update UI with received data
+                    document.getElementById('merchant-name').textContent = data.MerchantName || '-';
+                    if (data.MerchantPhoneNumber !== null && data.MerchantPhoneNumber !== undefined) {
+                        document.getElementById('merchant-phone-number').textContent = data.MerchantPhoneNumber;
                     }
-                    return;
+                    if (data.TransactionDate !== null && data.TransactionDate !== undefined) {
+                        document.getElementById('transaction-date').textContent = data.TransactionDate;
+                    }
+        
+                    const itemsBody = document.getElementById('items-body');
+                    itemsBody.innerHTML = '';
+                    data.Items.forEach(item => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td>${item.Description}</td>
+                            <td>${item.Quantity || '-'}</td>
+                            <td>${item.Price || '-'}</td>
+                            <td>${item.TotalPrice || '-'}</td>
+                        `;
+                        itemsBody.appendChild(row);
+                    });
+        
+                    if (data.Total !== null && data.Total !== undefined) {
+                        document.getElementById('total').textContent = `Total: ${data.Total.toFixed(2)}`;
+                    }
+                    if (data.TotalTax !== null && data.TotalTax !== undefined) {
+                        document.getElementById('total-tax').textContent = `Total Tax: ${data.TotalTax.toFixed(2)}`;
+                    }
+        
+                    // Show result container
+                    document.getElementById('result-container').style.display = 'block';
+                } else {
+                    alert('There was a problem uploading your file. Please try again.');
                 }
-
-                const data = await response.json();
-                console.log('Response data:', data);
-
-                // Update UI with received data
-                document.getElementById('merchant-name').textContent = data.MerchantName || '-';
-                if (data.MerchantPhoneNumber !== null && data.MerchantPhoneNumber !== undefined) {
-                    document.getElementById('merchant-phone-number').textContent = data.MerchantPhoneNumber;
-                }
-
-                if (data.TransactionDate !== null && data.TransactionDate !== undefined) {
-                    document.getElementById('transaction-date').textContent = data.TransactionDate;
-                }
-
-                
-
-                const itemsBody = document.getElementById('items-body');
-                itemsBody.innerHTML = '';
-
-                data.Items.forEach(item => {
-                    const row = document.createElement('tr');
-                    row.innerHTML = `
-                        <td>${item.Description}</td>
-                        <td>${item.Quantity || '-'}</td>
-                        <td>${item.Price || '-'}</td>
-                        <td>${item.TotalPrice || '-'}</td>
-                    `;
-                    itemsBody.appendChild(row);
-                });
-
-                if (data.Total !== null && data.Total !== undefined) {
-                    document.getElementById('total').textContent = `Total: ${data.Total.toFixed(2)}`;
-                }
-
-                if (data.TotalTax !== null && data.TotalTax !== undefined) {
-                    document.getElementById('total-tax').textContent = `Total Tax: ${data.TotalTax.toFixed(2)}`;
-                }
-
-
-                // Show result container
-                document.getElementById('result-container').style.display = 'block';
-            } catch (error) {
-                console.error('Error:', error);
+        
+                // Hide progress bar
+                progressBarContainer.style.display = 'none';
+            };
+        
+            xhr.onerror = () => {
+                console.error('Error:', xhr.statusText);
                 alert('There was a problem uploading your file. Please try again.');
-            }
+        
+                // Hide progress bar
+                progressBarContainer.style.display = 'none';
+            };
+        
+            xhr.send(formData);
         });
-
+        
         // Update file text label
         const fileInput = document.getElementById('file-input');
         const fileText = document.querySelector('.file-text');
-
         fileInput.addEventListener('change', (e) => {
             if (e.target.files.length > 0) {
                 fileText.textContent = e.target.files[0].name;
@@ -126,6 +135,6 @@
                 fileText.textContent = 'Choose a file';
             }
         });
-    </script>
+        </script>
 </body>
 </html>
