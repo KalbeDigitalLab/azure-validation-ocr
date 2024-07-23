@@ -137,21 +137,29 @@ The integration of these services ensures that the application can accurately va
 ### Tools and Technologies
 
 - **Azure AI Custom Vision**: 
-  - Used for image validation and classification to distinguish between receipt and non-receipt images. It allows you to build and train custom image classifiers.
-  - [Learn more](https://learn.microsoft.com/en-us/azure/ai-services/custom-vision-service/)
+  - Used for image validation and classification to distinguish between receipt and non-receipt images. It allows you to build and train custom image classifiers. [Learn more](https://learn.microsoft.com/en-us/azure/ai-services/custom-vision-service/)
 
 - **Azure Document Intelligence**: 
-  - Provides OCR capabilities to extract text from receipt images and other structured documents. It enables intelligent document processing and data extraction.
-  - [Learn more](https://learn.microsoft.com/en-us/azure/ai-services/document-intelligence/?view=doc-intel-3.0.0)
+  - Provides OCR capabilities to extract text from receipt images and other structured documents. It enables intelligent document processing and data extraction. [Learn more](https://learn.microsoft.com/en-us/azure/ai-services/document-intelligence/)
 
 - **Flask**: 
   - A lightweight WSGI web application framework for Python. Flask is used for the backend implementation, handling API requests, processing images, and interacting with Azure AI services.
-  - Key features of Flask include its simplicity, flexibility, and ease of use for developing web applications.
-  - [Learn more](https://flask.palletsprojects.com/en/2.0.x/)
+  - Key features of Flask include its simplicity, flexibility, and ease of use for developing web applications. [Learn more](https://flask.palletsprojects.com/en/3.0.x/)
 
 - **HTML/CSS/JavaScript**:
   - The frontend is built using standard web technologies to create a simple and user-friendly interface. HTML structures the web pages, CSS styles them, and JavaScript adds interactivity.
 
 - **Python**: 
   - The programming language used for backend development, including interacting with Azure services and implementing the application's logic.
+ 
+### Run Web Apps
+1. Backend Setup
+   - Run Flask application
+     ```bash
+     python3 backend/wsgi.py
+     ```
+   - The backend server will start and listen for incoming requests.
+3. Frontend Setup
+   - Navigate to `frontend` folder
+   - Open `index.html` in a web browser. This will allow you to interact with frontend interface.
 
